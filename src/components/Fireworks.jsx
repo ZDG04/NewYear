@@ -5,12 +5,10 @@ import { loadFireworksPreset } from "tsparticles-preset-fireworks";
 const Fireworks = () => {
     const audioRef = useRef(null);
 
-    // Función para reproducir el sonido
     const playSound = () => {
         if (audioRef.current) {
             audioRef.current.currentTime = 0; // Reinicia el sonido
             audioRef.current.play().catch(err => {
-                // Manejo de errores en caso de que el sonido no se pueda reproducir
                 console.error("Error al reproducir el sonido:", err);
             });
         }
@@ -24,31 +22,31 @@ const Fireworks = () => {
         preset: "fireworks",
         particles: {
             move: {
-                speed: 3, // Velocidad de las partículas
+                speed: 3,
             },
             life: {
                 duration: {
-                    value: 25, // Duración de vida de las partículas
+                    value: 25,
                 },
             },
         },
         emitters: {
             rate: {
-                delay: 2, // Tiempo entre emisiones
-                quantity: 1, // Cantidad de fuegos artificiales emitidos a la vez
-            },
-            on: {
-                emit: playSound, // Llama a la función cuando se emiten partículas
+                delay: 2,
+                quantity: 1,
             },
         },
     };
 
     useEffect(() => {
-        // Precarga del sonido para asegurar que esté listo para reproducirse
-        if (audioRef.current) {
-            audioRef.current.load();
-        }
+        const interval = setInterval(() => {
+            playSound();
+        }, 1500);
+
+        return () => clearInterval(interval);
     }, []);
+
+    
 
     return (
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
