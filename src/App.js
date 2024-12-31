@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-route
 import Fireworks from "./components/Fireworks";
 import YearAnimation from "./components/YearAnimation";
 import FamilyPage from "./pages/Family"; // Cambio aquí: usar FamilyPage con mayúscula
+import PersonDetail from "./pages/PersonDetail";
 
 // Componente HomePage
 const HomePage = () => {
@@ -41,7 +42,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/family" element={<FamilyPage />} /> {/* Cambio aquí: usar FamilyPage */}
-      </Routes>
+        <Route path="/person/:name" element={<PersonDetail />} />      </Routes>
     </Router>
   );
 };

@@ -112,7 +112,7 @@ const FamilyPage = () => {
     return (
         <div className="family-page-main">
             <div className="family-container-tittle">
-                <h1 >Family</h1>
+                <h1 >🥂🎊 Familia Gómez Pérez 🎊🥂</h1>
             </div>
             <div className="family-container-menu-option">
                 <div className="family-container-acordeon">

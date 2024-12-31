@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
 
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+
+
 // Cargar imágenes dinámicamente usando require.context
 const importAllImages = (r) =>
   r.keys().map((key) => ({
@@ -21,6 +31,8 @@ const getImageDimensions = (src) => {
 
 export default function Gallery() {
   const [photos, setPhotos] = useState([]);
+
+  const [index, setIndex] = useState(-1);
 
   useEffect(() => {
     // Obtener las imágenes con sus dimensiones
@@ -52,17 +64,17 @@ export default function Gallery() {
   }
 
   return (
-    <RowsPhotoAlbum
-      photos={photos}
-      sizes={{
-        size: "1168px",
-        sizes: [
-          {
-            viewport: "(max-width: 1200px)",
-            size: "calc(100vw - 32px)",
-          },
-        ],
-      }}
-    />
+    <>
+      <RowsPhotoAlbum photos={photos} targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
+
+      <Lightbox
+        slides={photos}
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        // enable optional lightbox plugins
+        plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+      />
+    </>
   );
 }
