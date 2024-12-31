@@ -1,17 +1,16 @@
 /* family.css */
 .family-page-main {
-    background-color: black;
     color: white;
-    height: 100vh;
     /* Esto asegura que el fondo cubra toda la altura de la ventana */
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
+    padding-top: 0;
+    border-top: 0;
 }
 
-h1 {
+.family-container-tittle h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
@@ -21,4 +20,14 @@ h1 {
     /* Ajusta el ancho de la galería */
     max-width: 1200px;
     /* Limita el tamaño máximo de la galería */
+}
+
+.family-container-tittle{
+    margin-top: 0;
+    padding: 10px;
+}
+
+.family-container-menu-option{
+    display: flex;
+    flex-direction: column;
 }

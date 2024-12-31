@@ -3,19 +3,21 @@ import Particles from "react-tsparticles";
 import { loadFireworksPreset } from "tsparticles-preset-fireworks";
 
 const Fireworks = () => {
-    const particlesInit = async (engine) => {
-        await loadFireworksPreset(engine);
-    };
-
-    // Ref para reproducir el sonido
     const audioRef = useRef(null);
 
     // Función para reproducir el sonido
     const playSound = () => {
         if (audioRef.current) {
             audioRef.current.currentTime = 0; // Reinicia el sonido
-            audioRef.current.play();
+            audioRef.current.play().catch(err => {
+                // Manejo de errores en caso de que el sonido no se pueda reproducir
+                console.error("Error al reproducir el sonido:", err);
+            });
         }
+    };
+
+    const particlesInit = async (engine) => {
+        await loadFireworksPreset(engine);
     };
 
     const options = {
@@ -42,14 +44,14 @@ const Fireworks = () => {
     };
 
     useEffect(() => {
-        // Precarga del sonido
+        // Precarga del sonido para asegurar que esté listo para reproducirse
         if (audioRef.current) {
             audioRef.current.load();
         }
     }, []);
 
     return (
-        <div>
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <audio ref={audioRef} src="/firework-sound.mp3" />
             <Particles
                 id="fireworks"
@@ -64,7 +66,6 @@ const Fireworks = () => {
                     zIndex: -1,
                 }}
             />
-            
         </div>
     );
 };
