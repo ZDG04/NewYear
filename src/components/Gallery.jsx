@@ -54,7 +54,7 @@ export default function Gallery() {
       );
       setPhotos(photosWithDimensions);
     };
-    
+
     loadImageDimensions();
   }, []);
 
@@ -65,7 +65,10 @@ export default function Gallery() {
 
   return (
     <>
-      <RowsPhotoAlbum photos={photos} targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
+      <RowsPhotoAlbum
+        photos={photos}
+        spacing={3}
+        targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
 
       <Lightbox
         slides={photos}
